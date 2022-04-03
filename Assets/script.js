@@ -15,7 +15,7 @@ generateBtn.addEventListener("click", writePassword);
 
 //  create password
 
-function createPassword() {
+function generatePassword() {
 
   userPassword = ""
 
@@ -24,47 +24,63 @@ function createPassword() {
   var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   var lowerCase = "abcdefghijklmnopqrstuvwxyz"
   var numbers = "1234567890"
-  var symbols = "!#$%&'()*+,-./:;<=>?@[]^_`{|}~"
+  var symbols = "!@#$%^&*()_+~-="
   var passwordCharacters = "";
   
+//add window prompts
  
-  var lowerConfirm = confirm("Include lowercase letters?")
+  var lowerConfirm = confirm("Add Uppercase Letters?")
   if (lowerConfirm) {
     passwordCharacters += lowerCase
   } else {
     passwordCharacters = passwordCharacters
   }
 
-  var upperConfirm = confirm("Include uppercase letters?")
+  var upperConfirm = confirm("Add Lowercase letters?")
   if (upperConfirm) {
     passwordCharacters += upperCase
   } else {
     passwordCharacters = passwordCharacters
   } 
 
-  var numberConfirm = confirm("Include numeric characters?")
+  var numberConfirm = confirm("Add numbers?")
   if (numberConfirm) {
     passwordCharacters += numbers
   } else {
     passwordCharacters = passwordCharacters
   }
 
-  var symbols = confirm("Include special characters?")
+  var symbols = confirm("Add symbols?")
   if (specialConfirm) {
     passwordCharacters += symbols
   } else {
     passwordCharacters = passwordCharacters
   }
 
+//prompt password length
 
-}
-
-var confirmUpperChar = confirm("Add Uppercase Letters?")
-    if (confirmUpperChar == true) {
-        selectedTypes = selectedTypes.concat(uppercase);
-        else
+  if (passwordCharacters.length > 1) {
+    var passwordLength = prompt("How many characters would you like your password to be?");
+    if (passwordLength < 8) {
+      alert("Password must be at least 8 characters long")
+      return "Invalid criteria, generate again"
+    } else if (passwordLength > 128){
+      alert("Password cannot exceed 128 characters")
+      return "Error, please try again!"
+    } else {
+        for (i = 0; i < passwordLength; i++) {
+          userPassword += passwordCharacters.charAt(Math.floor(Math.random() * passwordCharacters.length))
+        }
+        return userPassword
     }
+//add a catch to make sure user has selected at least one option
 
-  passwordText.value = password;
-
+  } else {
+    alert("You must include at least one type of character");
+    return "Error, please try again!";
+  }
 }
+
+
+
+
